@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Library {% endblock %}
+{% block title %} Fines {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -20,7 +20,7 @@
                   <li class="breadcrumb-item active" aria-current="page">My Books</li>
               </ol>
           </nav>
-          <h2 class="h4">My Borrowed Books</h2>
+          <h2 class="h4">Fines</h2>
 <!--          <p class="mb-0">.</p>-->
       </div>
       <div class="btn-toolbar mb-2 mb-md-0">
@@ -54,12 +54,12 @@
       <table class="table table-hover paginated-table" id="myTable" data-filter-control="true" data-show-search-clear-button="true">
           <thead>
               <tr>
-                  <th class="border-gray-200">LRN</th>
-                  <th class="border-gray-200">Book Title</th>
-                  <th class="border-gray-200">Author</th>
-                  <th class="border-gray-200">Date Borrowed</th>
-                  <th class="border-gray-200">Date Return Until</th>
-                  <th class="border-gray-200">Status</th>
+                  <th class="border-gray-200">#</th>
+                  <th class="border-gray-200">Category</th>
+                  <th class="border-gray-200">Penalty</th>
+<!--                  <th class="border-gray-200">Date Borrowed</th>-->
+<!--                  <th class="border-gray-200">Date Return Until</th>-->
+<!--                  <th class="border-gray-200">Status</th>-->
                   <th class="border-gray-200">Action</th>
               </tr>
           </thead>

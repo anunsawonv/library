@@ -60,13 +60,13 @@
                       <div class="col-lg-4 col-sm-6">
                           <div class="mb-4">
                               <label class="form-label">Contact</label>
-                              <input class="form-control" name="contact" type="text" required>
+                              <input type="tel" class="form-control" pattern="[09][0-9]{10}" maxlength="11" placeholder="example: 09123456890" name="contact" required>
                           </div>
                       </div>
                       <div class="col-lg-4 col-sm-6">
                           <div class="mb-4">
                               <label for="">Email</label>
-                              <input type="text" name="email" class="form-control" required>
+                              <input class="form-control" name="email" type="email" placeholder="example: anna@gmail.com" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))(com|cn)(\]?)$" size="30" required>
                           </div>
                       </div>
                       <div class="col-lg-4 col-sm-6">
@@ -90,6 +90,37 @@
       </div>
   </div>
 </form>
+<style>
+    div.notif{position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(24, 24, 24); background-color: rgba(0,0,0,0.4)}
+    input:invalid + span {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+
+{% if messages %}
+     {% for message in messages %}
+        <div class="notif" id="modal-default" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                  {% if message.tags == 'success' %}
+                  <div class="modal-header">
+                      <h2 class="h6 modal-title">Registration Success!</h2>
+                      <button type="button" class="btn-close" data-bs-dismiss="notif" href="/amsai/pre-registration/" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <p>Your Reference number: <a class="font-weight-bold" style="user-select: text; color: #4e73df; text-decoration: underline">{{ message }}</a>.</p>
+                      <p>Please wait for management to authorize your registration.</p>
+                  </div>
+                  <div class="modal-footer">
+                      <a type="button" class="btn btn-link text-gray-600 ms-auto" href="/amsai/lms/login/" data-bs-dismiss="notif">Sign In</a>
+                  </div>
+                  {% endif %}
+              </div>
+          </div>
+        </div>
+     {% endfor %}
+{% endif %}
 
 {% endblock content %}
 

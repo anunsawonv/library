@@ -1,8 +1,8 @@
 import datetime, string, random
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-
-from library.models import LmsEvents
+from django.contrib import messages
+from library.models import LmsEvents, LmsAnnouncement
 from user.models import *
 
 # Create your views here.
@@ -109,7 +109,9 @@ def registerNonstudent(request):
         else:
             LmsNonstudent.objects.create(name=name, address=address, contact=contact, username=username,
                                          dateregistered=dateregistered, status=status, password=password)
-            return redirect('/amsai/lms/login/')
+            messages.success(request, f'{username}')
+            return redirect('/amsai/lms/nonstudent_register/')
+    # return render(request, 'accounts/nonstudent_register.html', {'warn': "Complete the form"})
 
 
 # @login_required(login_url="/amsai/lms/login/")
@@ -125,10 +127,12 @@ def dashboard(request):
     cat = len(LmsCategory.objects.all())
     classf = len(LmsClassification.objects.all())
     date = datetime.datetime.today().date()
+    item = LmsEvents.objects.all()
+    announcement = LmsAnnouncement.objects.all().order_by('-id')[:2]
     fromyesterday = borrow - len(LmsLogs.objects.filter(status="Borrowed", datetrack=datetime.datetime.today().date()-timedelta(days=1)))
     return render(request, 'home/dashboard.html', {'books': books, 'events': events,
                                                    'borrow': borrow, 'date': date, 'cat': cat, 'classf': classf,
-                                                   'fromyesterday': fromyesterday})
+                                                   'fromyesterday': fromyesterday, 'item': item, 'announcement': announcement})
 
 
 def profile(request):
